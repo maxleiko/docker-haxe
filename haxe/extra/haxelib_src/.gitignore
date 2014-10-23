@@ -1,0 +1,8 @@
+*.exe
+*.n
+*.zip
+*.tmp
+*.db
+server
+package
+test/libraries/*.zip

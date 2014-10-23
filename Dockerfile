@@ -13,10 +13,15 @@ RUN         apt-get update
 
 # Install Oracle JDK8 & Haxe
 RUN         echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN         apt-get install -y oracle-java8-installer oracle-java8-set-default g++ haxe gcc-4.8-multilib g++-4.8-multilib
+RUN         apt-get install -y oracle-java8-installer oracle-java8-set-default g++ gcc-4.8-multilib g++-4.8-multilib neko
 
-RUN         echo /usr/share/haxe/lib > /root/.haxelib
+ADD         haxe /usr/lib/haxe
+ADD         haxelib /usr/bin/haxelib
+RUN         ln -s /usr/lib/haxe/haxe /usr/bin/
+
 RUN         mkdir -p /usr/share/haxe/lib
+RUN         echo "/usr/share/haxe/lib" > /root/.haxelib
+
 RUN         haxelib install hxjava
 RUN         haxelib install hxcpp
 
